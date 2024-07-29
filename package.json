@@ -7,13 +7,16 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "lint": "eslint src/"
   },
+  "resolutions": {
+    "graceful-fs": "^4.2.11"
+  },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/codrops/RainEffect.git"
+    "url": "git+https://github.com/PkChris/Rainy-Window-for-Lively-Wallpaper.git"
   },
   "author": "",
-  "license": "SEE LICENSE IN http://tympanus.net/codrops/licensing/",
-  "homepage": "https://github.com/codrops/RainEffect",
+  "license": "",
+  "homepage": "https://github.com/PkChris/Rainy-Window-for-Lively-Wallpaper",
   "devDependencies": {
     "babel": "^5.8.29",
     "babelify": "^6.4.0",
