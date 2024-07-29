@@ -5,8 +5,8 @@ var gulp = require('gulp'),
   uglify = require('gulp-uglify'),
   streamify = require('gulp-streamify'),
   babelify = require("babelify");
-	gsap = require("gsap");
-	glslify = require("glslify");
+  gsap = require("gsap");
+  glslify = require("glslify");
 
 function compileJS(file){
   browserify('src/'+file+'.js',{debug:true})
