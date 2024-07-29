@@ -8,7 +8,6 @@
 
 .icon {
   font-family: 'icomoon';
-  speak: none;
   font-style: normal;
   font-weight: normal;
   font-variant: normal;
@@ -39,11 +38,15 @@
   content: "\e906";
 }
 
+.image-preload {
+  display: none;
+}
+
 .slideshow {
   position: relative;
   height: 100vh;
   width: 100vw;
-  background: url(../img/city.jpg) no-repeat center top;
+  background: url(../img/city.png) no-repeat center top;
   background-size: cover;
   overflow: hidden;
 }
@@ -94,6 +97,7 @@
   display: block;
   padding: 1em;
   color: #252445;
+  text-decoration: none;
   -webkit-transition: color 0.3s;
   transition: color 0.3s;
 }
@@ -113,7 +117,6 @@
   margin: 0.25em 0 0 0;
   font-weight: 700;
 }
-
 
 /* Content */
 

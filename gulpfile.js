@@ -16,15 +16,9 @@ function compileJS(file){
     .on("error", function (err) { console.log("Error : " + err.message); })
     .pipe(source(file+'.min.js'))
     .pipe(streamify(uglify()))
-    .pipe(gulp.dest('demo/js'));
+    .pipe(gulp.dest('build/js'));
 }
-gulp.task('default',['js1','js2','js3'],function(){});
-gulp.task('js1',function(){
+gulp.task('default',['js'],function(){});
+gulp.task('js',function(){
   compileJS('index');
-});
-gulp.task('js2',function(){
-  compileJS('index2');
-});
-gulp.task('js3',function(){
-  compileJS('index3');
 });

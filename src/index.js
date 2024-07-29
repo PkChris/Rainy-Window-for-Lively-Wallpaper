@@ -20,12 +20,12 @@ let textureFg,
   textureBgCtx;
 
 let textureBgSize={
-  width:384,
-  height:256
+  width:2560,
+  height:1440
 }
 let textureFgSize={
-  width:96,
-  height:64
+  width:2560,
+  height:1440
 }
 
 let raindrops,
@@ -43,20 +43,20 @@ function loadTextures(){
     {name:"dropAlpha",src:"img/drop-alpha.png"},
     {name:"dropColor",src:"img/drop-color.png"},
 
-    {name:"textureRainFg",src:"img/weather/texture-rain-fg.png"},
-    {name:"textureRainBg",src:"img/weather/texture-rain-bg.png"},
+    {name:"textureRainFg",src:"img/city.png"},
+    {name:"textureRainBg",src:"img/city-blur.png"},
 
-    {name:"textureStormLightningFg",src:"img/weather/texture-storm-lightning-fg.png"},
-    {name:"textureStormLightningBg",src:"img/weather/texture-storm-lightning-bg.png"},
+    {name:"textureStormLightningFg",src:"img/lightning-fg.png"},
+    {name:"textureStormLightningBg",src:"img/lightning-bg.png"},
 
-    {name:"textureFalloutFg",src:"img/weather/texture-fallout-fg.png"},
-    {name:"textureFalloutBg",src:"img/weather/texture-fallout-bg.png"},
+    {name:"textureFalloutFg",src:"img/city.png"},
+    {name:"textureFalloutBg",src:"img/city-blur.png"},
 
-    {name:"textureSunFg",src:"img/weather/texture-sun-fg.png"},
-    {name:"textureSunBg",src:"img/weather/texture-sun-bg.png"},
+    {name:"textureSunFg",src:"img/city.png"},
+    {name:"textureSunBg",src:"img/city-blur.png"},
 
-    {name:"textureDrizzleFg",src:"img/weather/texture-drizzle-fg.png"},
-    {name:"textureDrizzleBg",src:"img/weather/texture-drizzle-bg.png"},
+    {name:"textureDrizzleFg",src:"img/city.png"},
+    {name:"textureDrizzleBg",src:"img/city-blur.png"},
   ]).then((images)=>{
     textureRainFg = images.textureRainFg.img;
     textureRainBg = images.textureRainBg.img;
