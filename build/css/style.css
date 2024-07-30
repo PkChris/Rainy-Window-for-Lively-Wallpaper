@@ -71,7 +71,6 @@
   padding: 35vh 0 0 0;
   pointer-events: none;
   line-height: 1;
-  font-family: "Roboto", sans-serif;
 }
 
 .slide--current {
@@ -91,6 +90,7 @@
   align-items: center;
   position: absolute;
   bottom: 28vh;
+  display: none;
 }
 
 .nav-item {
