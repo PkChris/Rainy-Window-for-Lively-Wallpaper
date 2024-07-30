@@ -1,0 +1,97 @@
+{
+  "minR": {
+    "max": 100,
+    "min": 0,
+    "text": "Minimum Rain",
+    "type": "slider",
+    "value": 20
+  },
+  "maxR": {
+    "max": 100,
+    "min": 0,
+    "text": "Maximum Rain",
+    "type": "slider",
+    "value": 50
+  },
+  "rainChance": {
+    "max": 1,
+    "min": 0,
+    "step": 0.01,
+    "text": "Rain Chance",
+    "type": "slider",
+    "value": 0.35
+  },
+  "rainLimit": {
+    "max": 10,
+    "min": 0,
+    "text": "Rain Limit",
+    "type": "slider",
+    "value": 6
+  },
+  "dropletsRate": {
+    "max": 100,
+    "min": 0,
+    "text": "Droplets Rate",
+    "type": "slider",
+    "value": 50
+  },
+  "minimumDropletsSize": {
+    "max": 10,
+    "min": 0,
+    "step": 0.5,
+    "text": "Minimum Droplets Size",
+    "type": "slider",
+    "value": 3
+  },
+  "maximumDropletsSize": {
+    "max": 10,
+    "min": 0,
+    "step": 0.5,
+    "text": "Maximum Droplets Size",
+    "type": "slider",
+    "value": 5.5
+  },
+  "trailRate": {
+    "max": 10,
+    "min": 0,
+    "step": 0.5,
+    "text": "Trail Rate",
+    "type": "slider",
+    "value": 1
+  },
+  "minimumTrailScaleRange": {
+    "max": 1,
+    "min": 0,
+    "step": 0.01,
+    "text": "Minimum Trail Scale Range",
+    "type": "slider",
+    "value": 0.35
+  },
+  "maximumTrailScaleRange": {
+    "max": 1,
+    "min": 0,
+    "step": 0.01,
+    "text": "Maximum Trail Scale Range",
+    "type": "slider",
+    "value": 0.35
+  },
+  "fg": {
+    "type": "folderDropdown",
+    "value": "city.png",
+    "text": "Clear Rain Foreground (.jpg, .png, .webm)",
+    "filter": "*.jpg|*.jpeg|*.png|*.webm",
+    "folder": "media"
+  },
+  "bg": {
+    "type": "folderDropdown",
+    "value": "city-blur.png",
+    "text": "Blurred Rain Background (.jpg, .png, .webm)",
+    "filter": "*.jpg|*.jpeg|*.png|*.webm",
+    "folder": "media"
+  },
+  "parallaxChk": {
+    "type": "checkbox",
+    "value": false,
+    "text": "Parallax"
+  }
+}
