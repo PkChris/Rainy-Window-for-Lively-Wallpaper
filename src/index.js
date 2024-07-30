@@ -20,12 +20,12 @@ let textureFg,
   textureBgCtx;
 
 let textureBgSize={
-  width:2560,
-  height:1440
+  width:window.innerWidth,
+  height:window.innerHeight
 }
 let textureFgSize={
-  width:2560,
-  height:1440
+  width:window.innerWidth,
+  height:window.innerHeight
 }
 
 let raindrops,
@@ -122,8 +122,7 @@ function init(){
 }
 
 function setupEvents(){
-
-  setupParallax();
+  //setupParallax();
   setupWeather();
   setupFlash();
 }
