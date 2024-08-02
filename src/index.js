@@ -118,11 +118,71 @@ function init(){
     // maxRefraction:512
   });
 
-  setupEvents();
+  //setupEvents();
+
+  let weatherData={
+    raining:true,
+    minR:20,
+    maxR:50,
+    rainChance:0.35,
+    rainLimit:6,
+    dropletsRate:50,
+    dropletsSize:[3,5.5],
+    trailRate:1,
+    trailScaleRange:[0.25,0.35],
+    fg:textureRainFg,
+    bg:textureRainBg,
+    flashFg:null,
+    flashBg:null,
+    flashChance:0,
+    collisionRadiusIncrease:0.0002
+  };
+
+  raindrops.options=Object.assign(raindrops.options,weatherData)
+
+  raindrops.clearDrops();
+}
+
+function livelyPropertyListener(name, val) {
+  switch (name) {
+    case "raining":
+      weatherData.raining = val;
+      break;
+    case "minR":
+      weatherData.minR = val;
+      break;
+    case "maxR":
+      weatherData.maxR = val;
+      break;
+    case "rainChance":
+      weatherData.rainChance = val;
+      break;
+    case "rainLimit":
+      weatherData.rainLimit = val;
+      break;
+    case "dropletsRate":
+      weatherData.dropletsRate = val;
+      break;
+    case "dropletsSize":
+      weatherData.dropletsSize = val;
+      break;
+    case "trailRate":
+      weatherData.trailRate = val;
+      break;
+    case "trailScaleRange":
+      weatherData.trailScaleRange = val;
+      break;
+  }
+
+  raindrops.options = Object.assign(raindrops.options, weatherData);
+
+  raindrops.clearDrops();
+
+  renderer.updateTextures();
 }
 
 function setupEvents(){
-  //setupParallax();
+  setupParallax();
   setupWeather();
   setupFlash();
 }
