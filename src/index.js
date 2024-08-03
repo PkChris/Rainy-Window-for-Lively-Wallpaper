@@ -138,47 +138,33 @@ function init(){
     collisionRadiusIncrease:0.0002
   };
 
+  function livelyPropertyListener(name, val) {
+    switch (name) {
+      case "minR":
+        weatherData.minR = val;
+        break;
+      case "maxR":
+        weatherData.maxR = val;
+        break;
+      case "rainChance":
+        weatherData.rainChance = val;
+        break;
+      case "rainLimit":
+        weatherData.rainLimit = val;
+        break;
+      case "dropletsRate":
+        weatherData.dropletsRate = val;
+        break;
+    }
+
+    raindrops.options = Object.assign(raindrops.options, weatherData);
+
+    raindrops.clearDrops();
+  }
+
   raindrops.options=Object.assign(raindrops.options,weatherData)
 
   raindrops.clearDrops();
-}
-
-function livelyPropertyListener(name, val) {
-  switch (name) {
-    case "raining":
-      weatherData.raining = val;
-      break;
-    case "minR":
-      weatherData.minR = val;
-      break;
-    case "maxR":
-      weatherData.maxR = val;
-      break;
-    case "rainChance":
-      weatherData.rainChance = val;
-      break;
-    case "rainLimit":
-      weatherData.rainLimit = val;
-      break;
-    case "dropletsRate":
-      weatherData.dropletsRate = val;
-      break;
-    case "dropletsSize":
-      weatherData.dropletsSize = val;
-      break;
-    case "trailRate":
-      weatherData.trailRate = val;
-      break;
-    case "trailScaleRange":
-      weatherData.trailScaleRange = val;
-      break;
-  }
-
-  raindrops.options = Object.assign(raindrops.options, weatherData);
-
-  raindrops.clearDrops();
-
-  renderer.updateTextures();
 }
 
 function setupEvents(){
