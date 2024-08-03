@@ -14,8 +14,11 @@
     "type": "git",
     "url": "git+https://github.com/PkChris/Rainy-Window-for-Lively-Wallpaper.git"
   },
-  "author": "",
-  "license": "",
+  "author": "PkChris",
+  "contributors": [
+    {"name":"Lucas Bebber","url":"https://github.com/lbebber"}
+  ],
+  "license": "See LICENSE.txt",
   "homepage": "https://github.com/PkChris/Rainy-Window-for-Lively-Wallpaper",
   "devDependencies": {
     "babel": "^5.8.29",
