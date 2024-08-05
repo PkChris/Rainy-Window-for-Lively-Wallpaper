@@ -16,7 +16,7 @@ function compileJS(file){
     .bundle()
     .on("error", function (err) { console.log("Error : " + err.message); })
     .pipe(source(file+'.js'))
-    //.pipe(streamify(uglify()))
+    .pipe(streamify(uglify()))
     .pipe(gulp.dest('build/js'));
 }
 
