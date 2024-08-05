@@ -89,9 +89,28 @@
     "filter": "*.jpg|*.jpeg|*.png|*.webm",
     "folder": "media"
   },
+  "lightningFg": {
+    "type": "folderDropdown",
+    "value": "city-lightning.png",
+    "text": "Clear Lightning Foreground (.jpg, .png, .webm)",
+    "filter": "*.jpg|*.jpeg|*.png|*.webm",
+    "folder": "media"
+  },
+  "lightningBg": {
+    "type": "folderDropdown",
+    "value": "city-lightning-blur.png",
+    "text": "Blurred Lightning Background (.jpg, .png, .webm)",
+    "filter": "*.jpg|*.jpeg|*.png|*.webm",
+    "folder": "media"
+  },
   "parallaxChk": {
     "type": "checkbox",
     "value": false,
     "text": "Parallax"
+  },
+  "lightningChk": {
+    "type": "checkbox",
+    "value": false,
+    "text": "Lightning"
   }
 }
