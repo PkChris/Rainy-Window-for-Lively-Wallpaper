@@ -1,8 +1,8 @@
 {
   "AppVersion": "1.0.0",
   "Title": "Rainy Window",
-  "Thumbnail": "thumbnail.jpg",
-  "Preview": "preview.gif",
+  "Thumbnail": "lively-thumbnail.jpg",
+  "Preview": "lively-preview.gif",
   "Desc": "Rainy window with realistic effects and customization",
   "Author": "PkChris (Rain Effect by Lucas Bebber)",
   "License": "See LICENSE.txt",
