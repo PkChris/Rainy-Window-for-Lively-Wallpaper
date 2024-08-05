@@ -34,10 +34,6 @@ let raindrops,
 
 let parallax={x:0,y:0};
 
-let weatherData=null;
-let curWeatherData=null;
-let blend={v:0};
-
 function loadTextures(){
   loadImages([
     {name:"dropAlpha",src:"img/drop-alpha.png"},
@@ -46,32 +42,14 @@ function loadTextures(){
     {name:"textureRainFg",src:"img/city.png"},
     {name:"textureRainBg",src:"img/city-blur.png"},
 
-    {name:"textureStormLightningFg",src:"img/lightning-fg.png"},
-    {name:"textureStormLightningBg",src:"img/lightning-bg.png"},
-
-    {name:"textureFalloutFg",src:"img/city.png"},
-    {name:"textureFalloutBg",src:"img/city-blur.png"},
-
-    {name:"textureSunFg",src:"img/city.png"},
-    {name:"textureSunBg",src:"img/city-blur.png"},
-
-    {name:"textureDrizzleFg",src:"img/city.png"},
-    {name:"textureDrizzleBg",src:"img/city-blur.png"},
+    {name:"textureStormLightningFg",src:"img/city-lightning.png"},
+    {name:"textureStormLightningBg",src:"img/city-lightning-blur.png"},
   ]).then((images)=>{
     textureRainFg = images.textureRainFg.img;
     textureRainBg = images.textureRainBg.img;
 
-    textureFalloutFg = images.textureFalloutFg.img;
-    textureFalloutBg = images.textureFalloutBg.img;
-
     textureStormLightningFg = images.textureStormLightningFg.img;
     textureStormLightningBg = images.textureStormLightningBg.img;
-
-    textureSunFg = images.textureSunFg.img;
-    textureSunBg = images.textureSunBg.img;
-
-    textureDrizzleFg = images.textureDrizzleFg.img;
-    textureDrizzleBg = images.textureDrizzleBg.img;
 
     dropColor = images.dropColor.img;
     dropAlpha = images.dropAlpha.img;
@@ -79,10 +57,11 @@ function loadTextures(){
     init();
   });
 }
+
 loadTextures();
 
 function init(){
-  canvas=document.querySelector('#container');
+  canvas=document.querySelector('#canvas');
 
   let dpi=window.devicePixelRatio;
   canvas.width=window.innerWidth*dpi;
@@ -118,10 +97,44 @@ function init(){
     // maxRefraction:512
   });
 
-  //setupEvents();
+  let defaultWeatherData={
+    minR:10,
+    maxR:40,
+    maxDrops:900,
+    rainChance:0.3,
+    rainLimit:3,
+    dropletsRate:50,
+    dropletsSize:[2,4],
+    dropletsCleaningRadiusMultiplier:0.43,
+    globalTimeScale:1,
+    trailRate:1,
+    autoShrink:true,
+    spawnArea:[-0.1,0.95],
+    trailScaleRange:[0.2,0.5],
+    fg:textureRainFg,
+    bg:textureRainBg,
+    flashFg:null,
+    flashBg:null,
+    flashChance:0,
+    collisionRadius:0.65,
+    collisionRadiusIncrease:0.01,
+    dropFallMultiplier:1,
+    collisionBoostMultiplier:0.05,
+    collisionBoost:1,
+  }
 
-  let weatherData={
-    raining:true,
+  let drizzleWeatherData={
+    minR:10,
+    maxR:40,
+    rainChance:0.15,
+    rainLimit:2,
+    dropletsRate:10,
+    dropletsSize:[3.5,6],
+    fg:textureDrizzleFg,
+    bg:textureDrizzleBg
+  };
+
+  let rainyWeatherData={
     minR:20,
     maxR:50,
     rainChance:0.35,
@@ -132,12 +145,43 @@ function init(){
     trailScaleRange:[0.25,0.35],
     fg:textureRainFg,
     bg:textureRainBg,
-    flashFg:null,
-    flashBg:null,
-    flashChance:0,
     collisionRadiusIncrease:0.0002
   };
 
+  let stormyWeatherData={
+    maxR:55,
+    rainChance:0.4,
+    dropletsRate:80,
+    dropletsSize:[3,5.5],
+    trailRate:2.5,
+    trailScaleRange:[0.25,0.4],
+    fg:textureRainFg,
+    bg:textureRainBg,
+    flashFg:textureStormLightningFg,
+    flashBg:textureStormLightningBg,
+    flashChance:0.1
+  };
+
+  let typhoonWeatherData={
+    minR:30,
+    maxR:60,
+    rainChance:0.5,
+    dropletsRate:80,
+    dropletsSize:[3,5.5],
+    trailRate:4,
+    fg:textureRainFg,
+    bg:textureRainBg,
+    flashFg:textureStormLightningFg,
+    flashBg:textureStormLightningBg,
+    flashChance:0.15,
+    collisionRadiusIncrease:0
+  };
+
+  // Choose the weather data to use
+  let weatherData = rainyWeatherData;
+
+  //lively api
+  //docs: https://github.com/rocksdanister/lively/wiki/Web-Guide-IV-:-Interaction
   function livelyPropertyListener(name, val) {
     switch (name) {
       case "minR":
@@ -158,20 +202,16 @@ function init(){
     }
 
     raindrops.options = Object.assign(raindrops.options, weatherData);
-
     raindrops.clearDrops();
   }
 
   raindrops.options=Object.assign(raindrops.options,weatherData)
-
   raindrops.clearDrops();
+
+  //setupParallax();
+  setupFlash(weatherData);
 }
 
-function setupEvents(){
-  setupParallax();
-  setupWeather();
-  setupFlash();
-}
 function setupParallax(){
   document.addEventListener('mousemove',(event)=>{
     let x=event.pageX;
@@ -188,132 +228,13 @@ function setupParallax(){
     })
   });
 }
-function setupFlash(){
+
+function setupFlash(weatherData){
   setInterval(()=>{
-    if(chance(curWeatherData.flashChance)){
-      flash(curWeatherData.bg,curWeatherData.fg,curWeatherData.flashBg,curWeatherData.flashFg);
+    if(chance(weatherData.flashChance)){
+      flash(weatherData.bg,weatherData.fg,weatherData.flashBg,weatherData.flashFg);
     }
   },500)
-}
-function setupWeather(){
-  setupWeatherData();
-  window.addEventListener("hashchange",(event)=>{
-    updateWeather();
-  });
-  updateWeather();
-}
-function setupWeatherData(){
-  let defaultWeather={
-    raining:true,
-    minR:20,
-    maxR:50,
-    rainChance:0.35,
-    rainLimit:6,
-    dropletsRate:50,
-    dropletsSize:[3,5.5],
-    trailRate:1,
-    trailScaleRange:[0.25,0.35],
-    fg:textureRainFg,
-    bg:textureRainBg,
-    flashFg:null,
-    flashBg:null,
-    flashChance:0,
-    collisionRadiusIncrease:0.0002
-  };
-
-  function weather(data){
-    return Object.assign({},defaultWeather,data);
-  }
-
-  weatherData={
-    rain:weather({
-      rainChance:0.35,
-      dropletsRate:50,
-      raining:true,
-      // trailRate:2.5,
-      fg:textureRainFg,
-      bg:textureRainBg
-    }),
-    storm:weather({
-      maxR:55,
-      rainChance:0.4,
-      dropletsRate:80,
-      dropletsSize:[3,5.5],
-      trailRate:2.5,
-      trailScaleRange:[0.25,0.4],
-      fg:textureRainFg,
-      bg:textureRainBg,
-      flashFg:textureStormLightningFg,
-      flashBg:textureStormLightningBg,
-      flashChance:0.1
-    }),
-    fallout:weather({
-      minR:30,
-      maxR:60,
-      rainChance:0.35,
-      dropletsRate:20,
-      trailRate:4,
-      fg:textureFalloutFg,
-      bg:textureFalloutBg,
-      collisionRadiusIncrease:0
-    }),
-    drizzle:weather({
-      minR:10,
-      maxR:40,
-      rainChance:0.15,
-      rainLimit:2,
-      dropletsRate:10,
-      dropletsSize:[3.5,6],
-      fg:textureDrizzleFg,
-      bg:textureDrizzleBg
-    }),
-    sunny:weather({
-      rainChance:0,
-      rainLimit:0,
-      droplets:0,
-      raining:false,
-      fg:textureSunFg,
-      bg:textureSunBg
-    }),
-  };
-}
-function updateWeather(){
-  let hash=window.location.hash;
-  let currentSlide=null;
-  let currentNav=null;
-  if(hash!=""){
-    currentSlide = document.querySelector(hash);
-  }
-  if(currentSlide==null){
-    currentSlide = document.querySelector(".slide");
-    hash="#"+currentSlide.getAttribute("id");
-  }
-  currentNav=document.querySelector("[href='"+hash+"']");
-  let data=weatherData[currentSlide.getAttribute('data-weather')];
-  curWeatherData=data;
-
-  raindrops.options=Object.assign(raindrops.options,data)
-
-  raindrops.clearDrops();
-
-  TweenLite.fromTo(blend,1,{
-    v:0
-  },{
-    v:1,
-    onUpdate:()=>{
-      generateTextures(data.fg,data.bg,blend.v);
-      renderer.updateTextures();
-    }
-  })
-
-  let lastSlide=document.querySelector(".slide--current");
-  if(lastSlide!=null) lastSlide.classList.remove("slide--current");
-
-  let lastNav=document.querySelector(".nav-item--current");
-  if(lastNav!=null) lastNav.classList.remove("nav-item--current");
-
-  currentSlide.classList.add("slide--current");
-  currentNav.classList.add("nav-item--current");
 }
 
 function flash(baseBg,baseFg,flashBg,flashFg){
@@ -346,8 +267,8 @@ function flash(baseBg,baseFg,flashBg,flashFg){
   }).then(()=>{
     transitionFlash(0,0.25);
   });
-
 }
+
 function generateTextures(fg,bg,alpha=1){
   textureFgCtx.globalAlpha=alpha;
   textureFgCtx.drawImage(fg,0,0,textureFgSize.width,textureFgSize.height);

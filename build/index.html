@@ -4,38 +4,9 @@
   <meta charset="UTF-8" />
   <title>Rainy Window</title>
   <link rel="icon" type="image/x-icon" href="favicon.ico">
-  <link rel="stylesheet" type="text/css" href="css/normalize.css" />
-  <link rel="stylesheet" type="text/css" href="css/style.css" />
-</head>
-<body>
-  <div class="image-preload">
-    <img src="img/drop-color.png">
-    <img src="img/drop-alpha.png">
-    <img src="img/city.png">
-    <img src="img/city-blur.png">
-  </div>
-  <div class="container">
-    <div class="slideshow">
-      <canvas width="1" height="1" id="container" style="position:absolute"></canvas>
-      <!-- Heavy Rain -->
-      <div class="slide" id="slide-1" data-weather="rain"></div>
-      <!-- Drizzle -->
-      <div class="slide" id="slide-2" data-weather="drizzle"></div>
-      <!-- Sunny -->
-      <div class="slide" id="slide-3" data-weather="sunny"></div>
-      <!-- Heavy rain -->
-      <div class="slide" id="slide-5" data-weather="storm"></div>
-      <!-- Fallout (greenish overlay with slightly greenish/yellowish drops) -->
-      <div class="slide" id="slide-4" data-weather="fallout"></div>
-      <nav class="slideshow__nav">
-        <a class="nav-item" href="#slide-1"><i class="icon icon--rainy"></i><span>10/24</span></a>
-        <a class="nav-item" href="#slide-2"><i class="icon icon--drizzle"></i><span>10/25</span></a>
-        <a class="nav-item" href="#slide-3"><i class="icon icon--sun"></i><span>10/26</span></a>
-        <a class="nav-item" href="#slide-5"><i class="icon icon--storm"></i><span>10/28</span></a>
-        <a class="nav-item" href="#slide-4"><i class="icon icon--radioactive"></i><span>10/27</span></a>
-      </nav>
-    </div>
-  </div>
   <script src="js/index.js"></script>
+</head>
+<body style="background: url(img/city.png) no-repeat center top;background-size: 100vw 100vh;margin:0;">
+  <canvas width="1" height="1" id="canvas"></canvas>
 </body>
 </html>
