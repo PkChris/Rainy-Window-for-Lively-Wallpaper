@@ -22,7 +22,7 @@ Rainy window wallpaper using experimental WebGL rain drop effects by Lucas Bebbe
 
     * To build the main JS file, run the `gulp` command from the root directory of your project.
     * This will concatenate and minify the JavaScript files from the `src` directory and output the result to the `build/js` directory.
-    * It also zips the contents of the build directory into build.zip for the purpose of importing into [Lively Wallpaper](https://github.com/rocksdanister/lively). Unfortunately none of the [Lively Wallpaper controls](https://github.com/rocksdanister/lively/wiki/Web-Guide-IV-:-Interaction) are currently working due to `livelyPropertyListener()` just outright not working.
+    * It also zips the contents of the build directory into build.zip for the purpose of importing into [Lively Wallpaper](https://github.com/rocksdanister/lively). Unfortunately none of the [Lively Wallpaper controls](https://github.com/rocksdanister/lively/wiki/Web-Guide-IV-:-Interaction) are currently working due to `livelyPropertyListener()` just outright not working. Comment out line 19 in `gulpfile.js` to disable the minification step in the build process if you wish to try debugging this, since the `livelyPropertyListener()` function is renamed during minification and therefore will not work regardless.
   
 4. To preview, view index.html on a local server
 
